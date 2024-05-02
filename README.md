@@ -8,6 +8,7 @@ This is a demo application showcasing Laravel integration with Stripe for paymen
 2. **UI:** Built using React and Inertia.
 3. **Payment Gateway:** Managed by Stripe.
 4. **Database:** SQLite is used for demo purposes.
+5.  **Products:** Faker to generate dummy products.
 
 ## Setup
 
