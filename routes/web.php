@@ -33,15 +33,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/checkout', [ProductController::class, 'handle_checkout'])
+Route::get('/products/{id}/checkout', [ProductController::class, 'handle_checkout'])
 ->middleware(['auth', 'verified'])
 ->name('handle-checkout');
 
-Route::get('/checkout/success', [ProductController::class, 'handle_checkout_success'])
+Route::get('/products/{id}/checkout/success', [ProductController::class, 'handle_checkout_success'])
 ->middleware(['auth', 'verified'])
 ->name('handle-checkout-success');
 
-Route::get('/checkout/cancel', [ProductController::class, 'handle_checkout_cancel'])
+Route::get('/products/{id}/checkout/cancel', [ProductController::class, 'handle_checkout_cancel'])
 ->middleware(['auth', 'verified'])
 ->name('handle-checkout-cancel');
 

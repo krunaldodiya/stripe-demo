@@ -21,24 +21,36 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($request->id);
 
-        $intent = $request->user()->createSetupIntent();
-
-        return Inertia::render('ProductDetail', ['product' => $product, 'intent' => $intent]);
+        return Inertia::render('ProductDetail', ['product' => $product]);
     }
 
     public function handle_checkout(Request $request)
     {
-        // $intent = $request->user()->createSetupIntent();
+        $product = Product::findOrFail($request->id);
+
+        return $request->user()->checkoutCharge(
+            amount: $product->price * 100,
+            name: 'Pay',
+            quantity: 1,
+            sessionOptions: [
+                'success_url' => route('handle-checkout-success', ['id' => $product->id]),
+                'cancel_url' => route('handle-checkout-cancel', ['id' => $product->id]),
+                'expires_at' => now()->addMinutes(30)->timestamp,
+            ],
+            customerOptions: [
+                'name' => $request->user()->name,
+            ]
+        );
     }
 
     public function handle_checkout_success(Request $request)
     {
-        //
+        return Inertia::render('CheckoutStatus', ['success' => true]); 
     }
 
     public function handle_checkout_cancel(Request $request)
     {
-        //
+        return Inertia::render('CheckoutStatus', ['success' => false]);
     }
 }
 
