@@ -12,7 +12,14 @@ This is a demo application showcasing Laravel integration with Stripe for paymen
 
 ## Setup
 
-### 1. Migrate Database
+### 1. Add .env file
+Make sure to rename and update .env.example to .env:
+
+```bash
+mv .env.example .env
+```
+
+### 2. Migrate Database
 
 Before running the application, migrate the database by running the following command:
 
@@ -24,7 +31,7 @@ php artisan migrate:fresh --seed
 - **Email:** admin@example.com
 - **Password:** admin@123
 
-### 2. How to Run
+### 3. How to Run
 To start the Laravel server, run the following command:
 
 ```bash
