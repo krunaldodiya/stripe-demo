@@ -30,27 +30,24 @@ class ProductController extends Controller
 
         return $request->user()->checkoutCharge(
             amount: $product->price * 100,
-            name: 'Pay',
+            name: $product->title,
             quantity: 1,
             sessionOptions: [
                 'success_url' => route('handle-checkout-success', ['id' => $product->id]),
                 'cancel_url' => route('handle-checkout-cancel', ['id' => $product->id]),
                 'expires_at' => now()->addMinutes(30)->timestamp,
-            ],
-            customerOptions: [
-                'name' => $request->user()->name,
             ]
         );
     }
 
-    public function handle_checkout_success(Request $request)
+    public function handle_checkout_success(Request $request, $product_id)
     {
-        return Inertia::render('CheckoutStatus', ['success' => true]); 
+        return Inertia::render('CheckoutStatus', ['success' => true, 'product_id' => $product_id]); 
     }
 
-    public function handle_checkout_cancel(Request $request)
+    public function handle_checkout_cancel(Request $request, $product_id)
     {
-        return Inertia::render('CheckoutStatus', ['success' => false]);
+        return Inertia::render('CheckoutStatus', ['success' => false, 'product_id' => $product_id]); 
     }
 }
 
