@@ -9,14 +9,23 @@ This is a demo application showcasing Laravel integration with Stripe for paymen
 3. **Payment Gateway:** Managed by Stripe.
 4. **Database:** SQLite is used for demo purposes.
 
-## Demo User Login
+## Setup
 
+### 1. Migrate Database
+
+Before running the application, migrate the database by running the following command:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+## This will create a user with the following credentials:
 - **Email:** admin@example.com
 - **Password:** admin@123
 
-## How to Run
-
+### 2. How to Run
 To start the Laravel server, run the following command:
 
 ```bash
 php artisan serve
+```
